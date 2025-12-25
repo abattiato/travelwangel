@@ -1,0 +1,295 @@
+:root{
+  --white:#ffffff;
+  --sand:#f3ebe3;
+  --sand-deep:#ead7c6;
+  --logo-aqua:#78d7d0;
+  --logo-aqua-deep:#48b6ad;
+  --logo-aqua-foam:rgba(120,215,208,0.14);
+  --copper:#b86a45;
+  --copper-dark:#8f4b2f;
+  --muted-text:#27332f;
+  --glass:rgba(255,255,255,0.94);
+  --card-shadow:0 18px 46px rgba(20,30,28,0.06);
+  --max-width:1140px;
+  --side-gap: 1rem; /* match logo left spacing */
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:var(--muted-text);background:linear-gradient(180deg,var(--white) 0%, #fbfaf9 60%);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* Layout */
+.container, .main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Nav */
+nav{
+  width:100%;
+  margin:0; /* remove gaps so background sits flush */
+  background:var(--sand);
+  padding:0; /* container provides the vertical spacing */
+  box-shadow:none;
+}
+nav > .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem 1.25rem; /* controls top/bottom space so bg reaches both edges */
+}
+
+/* adjust logo sizing to fit the nav height */
+.logo img{height:200px;width:auto;display:block}
+
+/* ensure nav links sit flush to the right edge of the header */
+nav > .container{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--side-gap);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100%;
+}
+
+/* nav links: push to far right inside the container */
+nav > .container .nav-links{
+  display: flex !important;        /* ensure flex layout (not inline-flex with bad props) */
+  gap: 18px !important;
+  margin-left: auto !important;    /* pushes links to the right */
+  align-items: center !important;
+}
+.nav-links a{color:var(--logo-aqua-deep);font-weight:600;letter-spacing:1px;text-transform:uppercase;font-size:.9rem}
+.nav-links a:hover{color:var(--copper)}
+
+/* Hero (full-bleed handled by header element) */
+.hero{
+  width:100%;
+  margin:0;
+  position:relative;
+  overflow:visible;
+  /* restore the hero image */
+  background-image: url('images/Sea\ of\ Serenity.jpg');
+  background-size:cover;
+  background-position:center;
+  min-height:66vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:4rem 1rem 0;
+}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(72,182,173,0.12), rgba(255,255,255,0.5));z-index:0;backdrop-filter:blur(3px) saturate(1.02)}
+.hero-card{position:relative;z-index:1;background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,244,0.98));border-radius:12px;padding:2rem 2.4rem;max-width:72ch;box-shadow:var(--card-shadow);text-align:center}
+.hero-card h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);color:var(--muted-text);margin:0 0 .35rem}
+.hero-card p{color:rgba(39,51,47,0.78);margin:0 0 1rem;line-height:1.45}
+
+/* Buttons */
+.btn{display:inline-block;padding:.78rem 1.25rem;border-radius:999px;font-weight:700;cursor:pointer;transition:transform .18s ease,box-shadow .2s}
+.btn--primary{background:linear-gradient(90deg,var(--copper),var(--copper-dark));color:var(--white);box-shadow:0 12px 34px rgba(184,106,69,0.12);text-transform:uppercase;font-size:.88rem}
+.btn--aqua{background:linear-gradient(90deg,var(--logo-aqua),var(--logo-aqua-deep));color:var(--white);box-shadow:0 12px 30px rgba(72,182,173,0.09);font-size:.88rem}
+.btn--ghost{background:transparent;color:var(--logo-aqua-deep);border:1px solid rgba(72,182,173,0.06);padding:.68rem 1rem}
+.btn:hover{transform:translateY(-3px)}
+
+/* Wave (flip/position managed in page) */
+.wave{position:absolute;left:0;right:0;top:100%;width:100%;overflow:visible;line-height:0;z-index:6;pointer-events:none;transform:translateY(-1px)}
+.wave svg{display:block;width:100%;height:96px;transform:rotate(180deg);transform-origin:50% 50%}
+.wave--deep{color:var(--logo-aqua-deep);opacity:0.18}
+.wave--soft{color:var(--logo-aqua-foam);opacity:0.10}
+.wave--sand{color:rgba(184,106,69,0.06);opacity:0.10}
+
+/* contact-only transparent blue wave */
+.wave--blue-transparent{
+  margin:0;
+  display:block;
+  width:100%;
+  overflow:hidden;
+  line-height:0;
+  color: rgba(72,182,173,0.12); /* transparent blue */
+  position:relative;
+  z-index:1;
+}
+.wave--blue-transparent svg{display:block;width:100%;height:84px;}
+.wave--blue-transparent path{fill:currentColor;}
+
+/* make contact page wave sit flush with bottom of the nav */
+.contact-page nav{ margin-bottom:0; position:relative; z-index:2; }
+.contact-page .wave--blue-transparent{
+  margin-top:0;
+  position:relative;
+  z-index:1;
+  /* pull the wave up to sit exactly under the nav if nav has internal padding/border */
+  transform: translateY(-0.5px);
+  will-change:transform;
+}
+
+/* contact page: place the blue transparent wave as a transition under the nav */
+.contact-page .nav-header{
+  position:relative;
+}
+/* shallower overlap and slightly darker tint for the contact page wave */
+.contact-page .nav-header .wave--blue-transparent{
+  position:absolute;
+  left:-6%;
+  right:-6%;
+  bottom:-28px; /* less deep than before */
+  height:120px; /* reduced height so it doesn't intrude as far */
+  z-index:1;
+  overflow:visible;
+  color: rgba(72,182,173,0.24); /* darker transparent blue */
+}
+.contact-page .nav-header .wave--blue-transparent svg{
+  display:block;
+  width:calc(100% + 12%);
+  height:120px;
+}
+.contact-page #site-nav nav{
+  position:relative;
+  z-index:2;
+}
+.contact-page .section--heroless{ margin-top:20px; }
+.contact-page .hero-card.contact-hero{ position:relative; z-index:2; }
+
+/* contact page social icon under the hero card */
+.social--contact{
+  text-align:center;
+  margin:0.75rem 0 2rem;
+}
+.social--contact a{
+  display:inline-block;
+  background:transparent;
+  border-radius:6px;
+  padding:6px;
+  transition:transform .18s ease, opacity .18s ease;
+  color:var(--logo-aqua-deep); /* choose a color from the palette */
+}
+.social--contact a:hover{ transform:translateY(-4px); opacity:.95; }
+.social--contact img{
+  width:40px;
+  height:40px;
+  display:inline-block;
+  object-fit:contain;
+}
+
+/* ensure it sits visually below the hero card and within the page gradient */
+.contact-page .container { position:relative; z-index:1; }
+/* keep hero-card above the wave/icon if necessary */
+.contact-page .hero-card.contact-hero{ position:relative; z-index:2; }
+
+/* agent intro (profile + facebook) */
+.agent-intro{
+  text-align:center;
+  margin:1rem 0 1.6rem;
+  color:var(--muted-text);
+}
+.agent-intro h4{
+  margin:0 0 .5rem;
+  font-weight:600;
+  color:var(--muted-text);
+}
+/* Force avatar + Facebook icon to sit on the exact same horizontal center */
+.agent-row{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:0.5rem !important;
+  line-height:0 !important;
+  margin:0 auto !important;
+}
+.agent-row a{
+  display:inline-flex !important;
+  align-items:center !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+.agent-row img{
+  display:block !important;
+  margin:0 !important;
+  padding:0 !important;
+  transform:none !important;
+}
+.agent-row .profile{
+    width:150px !important;
+    height:150px !important;
+    flex:0 0 150px !important;
+    align-self:center !important;
+    object-fit:cover !important;
+    border-radius:50% !important;
+}
+.agent-row .social-icon{
+  width:100px !important;
+  height:100px !important;
+  flex:0 0 100px !important;
+  align-self:center !important;
+  object-fit:cover !important;
+  border-radius:50% !important;
+}
+.agent-row .social-icon{
+  object-fit:contain !important;
+  border-radius:8px !important;
+  background:transparent !important;
+}
+
+/* Main content */
+.main{max-width:var(--max-width);margin:0 auto;padding:2rem 1rem 4rem}
+.section{background:var(--white);border-radius:12px;padding:1.6rem;box-shadow:var(--card-shadow);margin:1.2rem 0;color:var(--muted-text)}
+.section--heroless{background:linear-gradient(180deg,var(--sand) 0%, #fff 60%)}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
+.card{border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfaf9);box-shadow:0 10px 30px rgba(18,30,28,0.04)}
+.card img{width:100%;height:170px;object-fit:cover;display:block;filter:contrast(.98) saturate(1.02)}
+.card-body{padding:1rem}
+
+/* Footer */
+footer{margin-top:2rem;padding:2rem 1rem;background:linear-gradient(180deg,#fff,#fbfaf9);color:var(--muted-text)}
+.footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:flex-start}
+
+/* Floating button */
+#bookNow{position:fixed;right:20px;bottom:20px;z-index:999;border-radius:40px;padding:.85rem 1.15rem;background:linear-gradient(90deg,var(--logo-aqua),var(--logo-aqua-deep));color:var(--white);box-shadow:0 18px 46px rgba(20,40,38,0.08);border:none;font-weight:700;cursor:pointer}
+#bookNow:hover{transform:translateY(-4px);box-shadow:0 26px 64px rgba(20,40,38,0.12)}
+
+/* Booking modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+.modal[hidden] { display: none; }
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 20, 18, 0.5);
+  backdrop-filter: blur(2px);
+}
+.modal__panel {
+  position: relative;
+  background: var(--surface, #fff);
+  color: var(--text, #111);
+  width: min(560px, calc(100% - 40px));
+  max-height: calc(100vh - 80px);
+  overflow: auto;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 30px rgba(10,20,20,0.25);
+  z-index: 1;
+}
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.modal form label { display:block; margin:0.6rem 0; font-size:0.95rem; }
+.modal input, .modal textarea {
+  width:100%; padding:0.5rem; margin-top:0.25rem; border:1px solid #ddd; border-radius:4px;
+}
+.modal__actions { display:flex; gap:0.5rem; margin-top:0.75rem; justify-content:flex-end; }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>travelwithangel.com | Angel's Travel Experiences</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- nav include -->
+  <div id="site-nav"></div>
+  <script src="include-nav.js" defer></script>
+
+  <header class="hero" role="banner" aria-label="Ocean view hero">
+    <div class="container">
+      <div class="hero-card" style="margin:0 auto;">
+        <h1>Seascapes & Serenity</h1>
+        <p>Luxury cruises, restorative journeys, and cultural experiences — curated with calm, crafted with care.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn--aqua" href="https://www.evotravelagent.com/angels_travel_experiences" role="button">Book With Angel</a>
+          <a class="btn btn--ghost" href="#">Explore Cruises</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- wave divider now placed inside header and absolutely positioned to overlap the image -->
+    <div class="wave wave--deep" aria-hidden="true">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,64 C150,120 350,16 600,32 C850,48 1050,112 1200,80 L1200,120 L0,120 Z" fill="currentColor"></path>
+      </svg>
+    </div>
+  </header>
+
+  <main class="main" role="main">
+    <section class="section section--heroless" aria-labelledby="why">
+      <h2 id="why">Why travel with Angel's Travel Experiences?</h2>
+      <p>White-sand mornings, slow sea afternoons, and soulful evenings — we design journeys that feel elevated, tranquil, and effortless.</p>
+
+      <div class="cards" aria-hidden="false">
+        <article class="card">
+          <img src="images/pooldeck.jpg" alt="Cruise deck with lounge chairs">
+          <div class="card-body">
+            <h3 style="margin:.25rem 0 .4rem;font-family:'Playfair Display',serif;">Luxury Cruises</h3>
+            <p style="margin:0;color:rgba(33,50,48,0.75);">Curated itineraries, wellness programming, and intimate ship experiences.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/spa2.jpg" alt="Poolside spa">
+          <div class="card-body">
+            <h3 style="margin:.25rem 0 .4rem;font-family:'Playfair Display',serif;">Restorative Journeys</h3>
+            <p style="margin:0;color:rgba(33,50,48,0.75);">Restorative treatments and slow living stays by the sea.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/scenery.jpg" alt="Window view">
+          <div class="card-body">
+            <h3 style="margin:.25rem 0 .4rem;font-family:'Playfair Display',serif;">Cultural Experiences</h3>
+            <p style="margin:0;color:rgba(33,50,48,0.75);">Personalized voyages for small groups and families.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- subtle soft wave (foam tint) -->
+    <div class="wave wave--soft" aria-hidden="true">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,48 C200,88 400,8 600,36 C800,64 1000,40 1200,48 L1200,120 L0,120 Z" fill="currentColor"></path>
+      </svg>
+    </div>
+
+    <section class="section" aria-labelledby="gallery">
+      <h2 id="gallery">Moments</h2>
+      <p>Images that capture the tone: bright white canvases, ocean blues, and warm sandy coppers.</p>
+      <div class="cards" style="margin-top:1rem;">
+        <div class="card"><img src="images/pool-wine.jpg" alt="Wine glass by pool"><div class="card-body"><p style="margin:0;">Leisure & refresh</p></div></div>
+        <div class="card"><img src="images/oceanview.jpg" alt="Calm sea at sunset"><div class="card-body"><p style="margin:0;">Quiet horizons</p></div></div>
+        <div class="card"><img src="images/paris-arielview.jpg" alt="City rooftop view"><div class="card-body"><p style="margin:0;">City interludes</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- footer wave with sandy copper whisper -->
+  <div class="wave wave--sand" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,80 C250,16 450,120 700,70 C950,20 1150,100 1200,72 L1200,120 L0,120 Z" fill="currentColor"></path>
+    </svg>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <h4 style="margin:.1rem 0;color:var(--copper);font-family:'Playfair Display',serif;">Angel's Travel Experiences</h4>
+        <p style="margin:.25rem 0 0;color:rgba(33,50,48,0.7);">Curated journeys across sea, shore, and city.</p>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <a href="#" class="btn btn--ghost">Privacy</a>
+        <a href="#" class="btn btn--ghost">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="bookNow" aria-label="Book Now">Book Now</button>
+
+  <!-- Booking modal -->
+  <div id="bookingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__panel" role="document">
+      <button class="modal__close" aria-label="Close booking form" data-close>&times;</button>
+      <h3 id="bookingTitle">Book With Angel</h3>
+      <form id="bookingForm">
+        <label>
+          Name
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Travel Date
+          <input type="date" name="date">
+        </label>
+        <label>
+          Notes
+          <textarea name="notes" rows="3"></textarea>
+        </label>
+        <div class="modal__actions">
+          <button type="submit" class="btn btn--aqua">Submit</button>
+          <button type="button" class="btn btn--ghost" data-close>Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="include-nav.js" defer></script>
+  <script src="book-form.js" defer></script>
+
+</body>
+</html>
